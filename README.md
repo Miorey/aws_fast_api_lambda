@@ -34,7 +34,7 @@ The deployment will creat:
 - A random pet name bucket where will be stored the packaged lambda.
 - An AWS lambda with your FastAPI.
 - An AWS role to be attached to the lambda.
-- The AWS API Gateway which will target the lambda.
+- The AWS API Gateway which will trigger the lambda.
 
 First you will need to edit your AWS region in my case
 `eu-central-1`. To do it edit `infrastructure/variables.tf` and change
