@@ -1,6 +1,6 @@
 
 resource "aws_iam_role" "my_fast_api_role" {
-  name = "my-fast-api-role"
+  name = "${var.api_name}-role"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -26,7 +26,7 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
 resource "aws_lambda_function" "my_fast_api"{
   depends_on = [aws_apigatewayv2_stage.lambda]
   filename = "${var.archive_root}/my-fast-api.zip"
-  function_name = "my-fast-api"
+  function_name = var.api_name
   description   = "My fast api lambda"
   handler       = "main.handler"
   runtime       = "python3.8"
@@ -35,7 +35,7 @@ resource "aws_lambda_function" "my_fast_api"{
 }
 
 resource "aws_apigatewayv2_api" "lambda" {
-  name          = "fast_api_lambda_gw"
+  name          = "${var.api_name}-gw"
   protocol_type = "HTTP"
 }
 

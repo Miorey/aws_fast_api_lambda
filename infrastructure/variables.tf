@@ -15,3 +15,8 @@ variable "archive_root" {
   type = string
   default = "./../dist"
 }
+
+variable "api_name" {
+  type = string
+  default = "my-fast-api"
+}
