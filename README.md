@@ -4,7 +4,7 @@ on AWS - Lambda using Terraform. Thanks to [@Sancho66](https://github.com/Sancho
 
 ## Pre-requirements
 To start you will need to install [terraform](https://www.terraform.io/downloads) and setup
-your aws credentials wit [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+your aws credentials with [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 Today AWS - Lambda, latest python version is 3.8, so this is the one we use.
 
 ## Init project
@@ -24,7 +24,6 @@ Go to `app` directory and execute `uvicorn main:app --reload`
 source venv/bin/activate
 cd app
 uvicorn main:app --reload
-cd ..
 ```
 
 Now on http://127.0.0.1:8000 you will have your api and on http://127.0.0.1:8000/docs
@@ -40,6 +39,8 @@ The deployment will creat:
 First you will need to edit your AWS region in my case
 `eu-central-1`. To do it edit `infrastructure/variables.tf` and change
 the `aws_region` variable value.
+
+To init terraform execute `make init`
 
 Now you just have to execute `make deploy` and it will do the job. 
 Answer `yes` to the question `Do you want to perform these actions?`
