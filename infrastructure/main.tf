@@ -37,11 +37,6 @@ resource "aws_lambda_function" "my_fast_api"{
 resource "aws_apigatewayv2_api" "lambda" {
   name          = "fast_api_lambda_gw"
   protocol_type = "HTTP"
-  cors_configuration {
-    allow_origins     = split(",", var.allowed_hosts)
-    allow_headers     = ["*"]
-    allow_methods     = ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"]
-  }
 }
 
 resource "aws_apigatewayv2_stage" "lambda" {
@@ -58,7 +53,6 @@ resource "aws_apigatewayv2_integration" "my_fast_api" {
   integration_type   = "AWS_PROXY"
   description        = "Lambda example"
   integration_uri    = aws_lambda_function.my_fast_api.invoke_arn
-  passthrough_behavior = "WHEN_NO_MATCH"
   integration_method = "POST"
 }
 
