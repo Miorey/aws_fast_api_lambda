@@ -1,25 +1,19 @@
-from fastapi import APIRouter, HTTPException, Response
+from fastapi import APIRouter, Request
+from fastapi.templating import Jinja2Templates
 
-from schemas.check_response import CheckResponse
+templates = Jinja2Templates(directory="templates")
+
 
 router = APIRouter(
     tags=["Status"],
 )
 
 
-@router.post("/ping", response_model=CheckResponse)
-async def check_http_response(check_response: CheckResponse, response: Response):
-    if 400 <= check_response.http_code:
-        raise HTTPException(status_code=check_response.http_code, detail=check_response.http_message)
-    response.status_code = check_response.http_code
-    return check_response
+@router.get("/style.css")
+async def style_endpoint(request: Request):
+    return templates.TemplateResponse("style/style.css", {"request": request})
 
 
 @router.get("/")
-async def root_endpoint():
-    return {"status": "OK", "message": "Et VOILA !"}
-
-
-@router.get("/ping")
-async def health_check():
-    return {"status": "OK", "message": "Pong"}
+async def root_endpoint(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})

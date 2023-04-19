@@ -18,5 +18,5 @@ variable "archive_root" {
 
 variable "api_name" {
   type = string
-  default = "my-fast-api"
+  default = "develinside-api"
 }

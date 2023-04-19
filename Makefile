@@ -7,6 +7,10 @@ run:
 init:
 	cd infrastructure && $(TF_EXEC) init
 
+clean_init:
+	cd infrastructure && rm -rf .terraform*
+	cd infrastructure && rm -rf terraform.tfstate*
+
 
 create-archive:
 	rm -rf tmp dist

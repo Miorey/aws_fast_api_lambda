@@ -12,4 +12,5 @@ app = FastAPI(title=TITLE, description=DESCRIPTION)
 app.add_exception_handler(RequestValidationError, handler=validation_exception_handler)
 
 app.include_router(status_router)
+
 handler = Mangum(app)
